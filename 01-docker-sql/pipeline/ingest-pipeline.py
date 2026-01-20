@@ -4,7 +4,7 @@
 import pandas as pd
 from sqlalchemy import create_engine
 from tqdm.auto import tqdm
-
+import sys
 # df.dtypes.astype(str).to_dict() -> returns the dtype in json
 
 def run():
@@ -35,13 +35,13 @@ def run():
     parse_dates = ['tpep_pickup_datetime', 'tpep_dropoff_datetime']
 
     sql='postgresql'
-    user='root'
-    password='root'
-    host='localhost'
+    user=sys.argv[1]
+    password=sys.argv[2]
+    host='pgdatabase'
     port=5432
     database='ny_taxi'
     chunksize=100000
-    tablename='yellow_taxi_data'
+    tablename=sys.argv[3]
     engine = create_engine(f"{sql}://{user}:{password}@{host}:{port}/{database}")
 
 
